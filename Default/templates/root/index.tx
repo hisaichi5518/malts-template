@@ -1,0 +1,5 @@
+: cascade layout::base {title => 'トップページ'}
+
+: around content -> {
+<p>Hello World!<p>
+: }
