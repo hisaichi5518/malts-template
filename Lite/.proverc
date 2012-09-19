@@ -1,0 +1,4 @@
+--exec "perl -Ilib -MTest::Name::FromLine -MTest::Flatten"
+--color
+--timer
+-w
