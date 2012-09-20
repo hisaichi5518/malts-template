@@ -28,9 +28,10 @@ use inc::Module::Install;
 
 all_from 'lib/MyApp.pm';
 
-requires 'Config::ENV' => 0.10;
-requires 'Teng' => 0.15;
+requires 'Config::ENV'     => 0.10;
+requires 'Teng'            => 0.15;
 requires 'Data::Validator' => 0.09;
+requires 'Proclet'         => 0.14;
 
 test_requires 'Test::More'     => 0.96;
 test_requires 'Test::Requires' => 0.06;
