@@ -7,4 +7,19 @@
             },
         ],
     },
+    'MyApp::Memcached' => {
+        session => {
+            'Cache::Memcached::Fast' => {
+                servers   => ['127.0.0.1:11211'],
+                namespace => 'session:',
+            },
+        },
+        cache => {
+            'Cache::Memcached::Fast' => {
+                servers   => ['127.0.0.1:11211'],
+                namespace => 'cache:',
+            },
+        },
+    },
+
 };
