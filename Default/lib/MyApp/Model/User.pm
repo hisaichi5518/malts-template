@@ -18,10 +18,12 @@ sub search_user {
     my $args = $self->validate($rule, @_);
     my $user_id = $args->{user_id};
 
-
     my $user = database->single('users', {id => $user_id});
     if (!$user) {
-        MyApp::Exception->throw(code => 404, message => 'ユーザーが存在していません');
+        MyApp::Exception->throw(
+            code    => 404,
+            message => 'ユーザーが存在していません',
+        );
     }
 
     return $user;
