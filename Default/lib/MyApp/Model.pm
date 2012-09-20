@@ -32,5 +32,4 @@ sub validate {
     return $args;
 }
 
-
 1;

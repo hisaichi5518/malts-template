@@ -21,5 +21,10 @@
             },
         },
     },
+    'Fluent::Logger' => {
+        host => 'localhost',
+        port => 24224,
+        tag_prefix => 'myapp',# TODO
+    },
 
 };
