@@ -8,7 +8,7 @@ use parent 'MyApp::Model';
 use MyApp::DB;
 use MyApp::Exception;
 
-sub search_user_info {
+sub search_user {
     my $self = shift;
 
     state $rule = $self->validator(
