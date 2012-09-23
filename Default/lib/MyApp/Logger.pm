@@ -3,12 +3,18 @@ use 5.10.1;
 use strict;
 use warnings;
 use Fluent::Logger;
+use MyApp::Logger::Stderr;
 use MyApp::Config;
 
 sub client {
-    state $client = Fluent::Logger->new(
-        config->param('Fluent::Logger'),
-    );
+    state $client = do {
+        if (my $config = config->param('Fluent::Logger')) {
+            Fluent::Logger->new($config);
+        }
+        else {
+            MyApp::Logger::Stderr->new;
+        }
+    };
 }
 
 sub post {
@@ -16,8 +22,6 @@ sub post {
     Carp::croak('$msg: must be a HashRef.') if ref $msg ne 'HASH';
 
     my $message = $class->_build_message($msg);
-
-    # TODO: evalしてダメだったら別のファイルに残すとかする
     $class->client->post($type, $message);
 }
 
