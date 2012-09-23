@@ -21,7 +21,7 @@
             },
         },
     },
-    'Fluent::Logger' => {
+    'Fluent::Logger' => { # この設定がなければMyApp::Logger::Stderrが使われる
         host => 'localhost',
         port => 24224,
         tag_prefix => 'myapp',# TODO
