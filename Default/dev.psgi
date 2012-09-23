@@ -13,8 +13,13 @@ use Plack::Session::Store::Cache;
 use MyApp::Memcached;
 
 builder {
-    # TODO: nginxの設定
-    enable 'ReverseProxy';
+
+    enable "Plack::Middleware::Static",
+        path => qr{^/(?:img|js|css|swf)/}, root => './public/';
+
+    enable "Plack::Middleware::Static",
+        path => qr{^/(?:favicon\.ico|robots\.txt)}, root => './public/';
+
     enable 'Session',
         store => Plack::Session::Store::Cache->new(
             cache => MyApp::Memcached->session,

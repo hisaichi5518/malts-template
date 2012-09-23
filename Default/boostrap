@@ -24,7 +24,7 @@ my @opts = (
     $kytprof ? '-MDevel::KYTProf' : (),
 );
 
-service 'web', 'plackup', '-r', '-p', '50001', '-a', 'app.psgi', @opts;
+service 'web', 'plackup', '-r', '-p', '50001', '-a', 'dev.psgi', @opts;
 service 'memcached', 'memcached', '-p', '11211';
 
 run;
