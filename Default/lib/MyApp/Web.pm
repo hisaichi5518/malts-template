@@ -25,23 +25,28 @@ sub to_app {
         my $self = $class->setup(env => $env);
         local $Malts::_context = $self;
 
-        my $res = eval { $self->_dispatch->finalize };
-        if (!$res || $@) {
-            my $is_blessed = blessed $@;
-            my $code    = $is_blessed ? $@->code      : 500;
-            my $message = $is_blessed ? $@->to_string : $@ || 'Died';
+        my $res;
+        $self->run_hooks('before_dispatch', \$res);
+        if (!$res) {
+            $res = eval { $self->dispatch };
+            if (!$res || $@) {
+                my $is_blessed = blessed $@;
+                my $code    = $is_blessed ? $@->code      : 500;
+                my $message = $is_blessed ? $@->to_string : $@ || 'Internet Server Error';
 
-            warn $self->encoding->encode($message);
-            if (!Malts::Util::DEBUG) {
-                $message = Malts::Util::remove_fileline($message);
+                warn $self->encoding->encode($message);
+                if (!Malts::Util::DEBUG) {
+                    $message = Malts::Util::remove_fileline($message);
+                }
+
+                $res = $self->render($code, 'error/index.tx', {
+                    message => $message,
+                });
             }
-
-            $res = $self->render($code, 'error/index.tx', {
-                message => $message,
-            })->finalize;
         }
 
-        return $res;
+        $self->run_hooks('after_dispatch', \$res);
+        return $res->finalize;
     };
 }
 
