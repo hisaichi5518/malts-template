@@ -7,6 +7,7 @@ use parent 'Malts';
 use Text::Xslate;
 use Scalar::Util qw/blessed/;
 use MyApp::Config ();
+use MyApp::Exception;
 use Malts::Util;
 use Encode;
 
@@ -30,16 +31,25 @@ sub to_app {
         if (!$res) {
             $res = eval { $self->dispatch };
             if (!$res || $@) {
-                my $is_blessed = blessed $@;
-                my $code    = $is_blessed ? $@->code      : 500;
-                my $message = $is_blessed ? $@->to_string : $@ || 'Internet Server Error';
+                my $error = $@;
+                my $is_blessed = blessed $error;
 
-                warn $self->encoding->encode($message);
+                if (!$error || !$is_blessed) {
+                    $error = MyApp::Exception->new(
+                        code    => 500,
+                        message => $error || 'Internet Server Error',
+                    );
+                }
+
+                # TODO: ログを良い感じに投げるべし！
+                # MyApp::Logger->post($error->type => {error => $error});
+
+                my $message = $error->message;
                 if (!Malts::Util::DEBUG) {
                     $message = Malts::Util::remove_fileline($message);
                 }
 
-                $res = $self->render($code, 'error/index.tx', {
+                $res = $self->render($error->code, 'error/index.tx', {
                     message => $message,
                 });
             }
