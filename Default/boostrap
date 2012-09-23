@@ -2,8 +2,14 @@
 use strict;
 use warnings;
 
+use File::Spec;
+use File::Basename;
+use lib File::Spec->catdir(dirname(__FILE__), 'extlib', 'lib', 'perl5');
+use lib File::Spec->catdir(dirname(__FILE__), 'lib');
+
 use Proclet::Declare;
 use Getopt::Long;
+use MyApp::Config;
 
 GetOptions(
     'kytprof'  => \my $kytprof,
@@ -14,6 +20,11 @@ env(
     LM_DEBUG => 1,
 );
 
-service('web', 'plackup', 'app.psgi');
+my @opts = (
+    $kytprof ? '-MDevel::KYTProf' : (),
+);
+
+service 'web', 'plackup', '-p', '50001', '-a', 'app.psgi', @opts;
+service 'memcached', 'memcached', '-p', '11211';
 
 run;
