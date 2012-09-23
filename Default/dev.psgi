@@ -14,10 +14,10 @@ use MyApp::Memcached;
 
 builder {
 
-    enable "Plack::Middleware::Static",
+    enable 'Static',
         path => qr{^/(?:img|js|css|swf)/}, root => './public/';
 
-    enable "Plack::Middleware::Static",
+    enable 'Static',
         path => qr{^/(?:favicon\.ico|robots\.txt)}, root => './public/';
 
     enable 'Session',
