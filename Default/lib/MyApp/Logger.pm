@@ -24,7 +24,12 @@ sub post {
 sub _build_message {
     my ($class, $msg) = @_;
 
-    # TODO: なにかしらする
+    for my $name (keys %$msg) {
+        my $v = $msg->{$name};
+        if (ref($v) =~ m/MyApp::DB::Row/gm) {
+            $msg->{$name} = $v->get_columns();
+        }
+    }
 
     return $msg;
 }
