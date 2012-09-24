@@ -24,7 +24,15 @@ my @opts = (
     $kytprof ? '-MDevel::KYTProf' : (),
 );
 
-service 'web', 'plackup', '-r', '-p', '50001', '-a', 'dev.psgi', @opts;
-service 'memcached', 'memcached', '-p', '11211';
+service('web' => 'plackup', '-r',
+    '-p' =>  config->param('boostrap')->{web}->{port},
+    '-a' =>  'dev.psgi',
+    '-R' => './templates,./config,./dev.psgi,',
+    @opts
+);
+
+service('memcached' => 'memcached',
+    '-p', config->param('boostrap')->{memcached}->{port}
+);
 
 run;

@@ -1,4 +1,8 @@
 {
+    'boostrap' => {
+        web       => {port => 50001},
+        memcached => {port => 11211},
+    },
     'MyApp::DB' => {
         connect_info => [
             'dbi:mysql:host=127.0.0.1;port=3306;database=test', 'root', '', {
