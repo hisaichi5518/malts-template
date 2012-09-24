@@ -25,6 +25,7 @@ sub code    { shift->{code}    }
 sub message { shift->{message} }
 sub file    { shift->{file}    }
 sub line    { shift->{line}    }
+sub type    { 'status.'.shift->code }
 
 sub to_string {
     my ($self) = @_;

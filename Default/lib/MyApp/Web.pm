@@ -8,6 +8,7 @@ use Text::Xslate;
 use Scalar::Util qw/blessed/;
 use MyApp::Config ();
 use MyApp::Exception;
+use MyApp::Logger;
 use Malts::Util;
 use Encode;
 
@@ -41,8 +42,8 @@ sub to_app {
                     );
                 }
 
-                # TODO: ログを良い感じに投げるべし！
-                # MyApp::Logger->post($error->type => {error => $error});
+                # dieで死んだものをすべてソイヤー！
+                MyApp::Logger->post($error->type => {error => $error});
 
                 my $message = $error->message;
                 if (!Malts::Util::DEBUG) {

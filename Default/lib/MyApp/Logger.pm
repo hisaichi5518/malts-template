@@ -30,8 +30,15 @@ sub _build_message {
 
     for my $name (keys %$msg) {
         my $v = $msg->{$name};
-        if (ref($v) =~ m/MyApp::DB::Row/gm) {
+
+        if (ref($v) =~ m/^MyApp::DB::Row/gm) {
             $msg->{$name} = $v->get_columns();
+        }
+        elsif (ref($v) =~ m/^MyApp::Exception/gm) {
+            $msg->{$name} = {
+                code    => $v->code,
+                message => $v->to_string,
+            };
         }
     }
 
