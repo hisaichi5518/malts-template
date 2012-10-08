@@ -1,6 +1,7 @@
 package MyApp::Model;
 use strict;
 use warnings;
+use MyApp::Types;
 use Data::Validator;
 use MyApp::Exception;
 

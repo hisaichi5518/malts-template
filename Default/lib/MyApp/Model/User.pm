@@ -12,7 +12,7 @@ sub search_user {
     my $self = shift;
 
     state $rule = $self->validator(
-        user_id => {isa => 'Num'},
+        user_id => {isa => 'UserId'},
     );
 
     my $args = $self->validate($rule, @_);
