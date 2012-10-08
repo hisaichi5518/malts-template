@@ -1,5 +1,6 @@
 : cascade layout::base {title => 'エラーだよ'}
 
 : around content -> {
-<p>Hello Error World!: <: $message :><p>
+<h1>ERROR!!</h1>
+<p><: $message :><p>
 : }
