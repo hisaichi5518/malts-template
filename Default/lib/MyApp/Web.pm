@@ -63,5 +63,4 @@ sub to_app {
 
 sub config { MyApp::Config->current }
 
-
 1;
