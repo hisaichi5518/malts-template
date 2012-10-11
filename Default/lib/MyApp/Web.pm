@@ -15,7 +15,8 @@ use Encode;
 sub view {
     my $self = shift;
     state $view = Text::Xslate->new(
-        path => [File::Spec->catdir($self->app->base_dir, 'templates')],
+        path   => [File::Spec->catdir($self->app->base_dir, 'templates')],
+        module => ['Malts::Web::View::Util'],
     );
 }
 
