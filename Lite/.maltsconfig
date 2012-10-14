@@ -1,0 +1,14 @@
+{
+    app_name => 'MyApp',
+    template_name => 'Default',
+    tags => {
+        controller => {
+                files => [
+                    'lib/MyApp/Web/Controller/Root.pm',
+                ],
+
+                module_path => qr/Root/,
+                module_name => qr/Root/,
+        },
+    },
+}
