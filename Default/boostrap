@@ -20,19 +20,15 @@ env(
     LM_DEBUG => 1,
 );
 
-my @opts = (
-    $kytprof ? '-MDevel::KYTProf' : (),
-);
-
 service('web' => 'plackup', '-r',
-    '-p' =>  config->param('boostrap')->{web}->{port},
     '-a' =>  'dev.psgi',
     '-R' => './templates,./config,./dev.psgi,',
-    @opts
+    $kytprof ? '-MDevel::KYTProf' : (),
+    @{config->param('boostrap')->{web} || []},
 );
 
 service('memcached' => 'memcached',
-    '-p', config->param('boostrap')->{memcached}->{port}
+    @{config->param('boostrap')->{memcached} || []},
 );
 
 run;

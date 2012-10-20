@@ -1,7 +1,7 @@
 {
     'boostrap' => {
-        web       => {port => 50001},
-        memcached => {port => 11211},
+        web       => [-p => 50002],
+        memcached => [-p => 11211],
     },
     'MyApp::DB' => {
         connect_info => [
