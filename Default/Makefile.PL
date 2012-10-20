@@ -5,10 +5,12 @@ BEGIN {
 
     # author requires, or bundled modules
     my @devmods = (
-        'inc::Module::Install'         => [1.00],
+        'inc::Module::Install'         => [1.06],
         'Module::Install::AuthorTests' => [0.002],
-        'Malts'                        =>
-            [0.05, 'https://github.com/malts/p5-malts/tarball/master'],
+        'Malts' => [
+            0.05,
+            'https://github.com/malts/p5-malts/tarball/master'
+        ],
     );
     my @not_available;
     while(my($mod, $args) = splice @devmods, 0, 2) {
@@ -16,6 +18,7 @@ BEGIN {
         my $uri = $args->[1];
         eval qq{use $mod $ver (); 1} or push @not_available, $uri ? $uri : $mod;
     }
+
     if(@not_available) {
         print qq{# The following modules are not available.\n};
         print qq{# `perl $0 | cpanm` will install them:\n};
@@ -23,7 +26,7 @@ BEGIN {
         exit 1;
      }
 }
-exit;
+
 use inc::Module::Install;
 
 all_from 'lib/MyApp.pm';
