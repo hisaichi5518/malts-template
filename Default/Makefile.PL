@@ -38,6 +38,8 @@ requires 'Proclet'         => 0.14;
 
 test_requires 'Test::More'     => 0.96;
 test_requires 'Test::Requires' => 0.06;
+test_requires 'Test::Warn'     => 0.23;
+test_requires 'Test::TCP'      => 1.17;
 
 tests_recursive;
 author_tests 'xt';
