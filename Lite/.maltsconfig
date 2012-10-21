@@ -1,6 +1,6 @@
 {
     app_name => 'MyApp',
-    flavor_name => 'Default',
+    flavor_name => 'Lite',
     tags => {
         controller => {
             files => [
