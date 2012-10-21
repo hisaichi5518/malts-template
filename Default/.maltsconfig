@@ -1,0 +1,27 @@
+{
+    app_name => 'MyApp',
+    flavor_name => 'Default',
+    tags => {
+        controller => {
+            files => [
+                'lib/MyApp/Web/Controller/Root.pm',
+                'templates/root/index.tx',
+            ],
+
+            module_path => qr/Root/,
+            module_name => qr/Root/,
+            module_camelized_path => qr/root/,
+            module_camelized_name => qr/root/,
+        },
+        model => {
+            files => [
+                'lib/MyApp/Model/User.pm',
+            ],
+
+            module_path => qr/User/,
+            module_name => qr/User/,
+            module_camelized_path => qr/user/,
+            module_camelized_name => qr/user/,
+        },
+    },
+}
