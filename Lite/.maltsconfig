@@ -1,14 +1,17 @@
 {
     app_name => 'MyApp',
-    template_name => 'Default',
+    flavor_name => 'Default',
     tags => {
         controller => {
-                files => [
-                    'lib/MyApp/Web/Controller/Root.pm',
-                ],
+            files => [
+                'lib/MyApp/Web/Controller/Root.pm',
+                'templates/root/index.tx',
+            ],
 
-                module_path => qr/Root/,
-                module_name => qr/Root/,
+            module_path => qr/Root/,
+            module_name => qr/Root/,
+            module_camelized_path => qr/root/,
+            module_camelized_name => qr/root/,
         },
     },
 }
