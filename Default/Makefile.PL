@@ -8,7 +8,7 @@ BEGIN {
         'inc::Module::Install'         => [1.06],
         'Module::Install::AuthorTests' => [0.002],
         'Malts' => [
-            0.05,
+            0.800,
             'https://github.com/malts/p5-malts/tarball/master'
         ],
     );
