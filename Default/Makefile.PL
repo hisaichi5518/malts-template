@@ -40,6 +40,7 @@ test_requires 'Test::More'     => 0.96;
 test_requires 'Test::Requires' => 0.06;
 test_requires 'Test::Warn'     => 0.23;
 test_requires 'Test::TCP'      => 1.17;
+test_requires 'Test::Name::FromLine' => 0.02;
 
 tests_recursive;
 author_tests 'xt';
